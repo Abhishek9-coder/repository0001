@@ -1,4 +1,4 @@
-package rahulshettyacademy.SeleniumFrameworkDesign;
+package rahulshettyacademy;
 
 /**
  * Hello world!

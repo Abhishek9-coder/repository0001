@@ -1,4 +1,4 @@
-package rahulshettyacademy.SeleniumFrameworkDesign;
+package rahulshettyacademy;
 
 import java.time.Duration;
 import java.util.List;
