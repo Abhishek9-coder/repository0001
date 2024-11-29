@@ -44,7 +44,7 @@ public class ProductCatalogue extends AbstractComponent
     	return products;
     	
     }
-    
+          
    
     
     public WebElement getProductName(String productName)

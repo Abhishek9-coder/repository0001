@@ -29,6 +29,11 @@ public class LandingPage extends AbstractComponent
     @FindBy(id = "login")
     WebElement submit;
     
+    @FindBy(css ="[class*='flyInOut']")
+    WebElement errorMessage;
+// .ng-tns-c4-2.ng-star-inserted.ng-trigger.ng-trigger-flyInOut.ngx-toastr.toast-error   
+    
+    
     //Action methods
     public ProductCatalogue loginApplication(String email,String password)
     {
@@ -36,14 +41,24 @@ public class LandingPage extends AbstractComponent
     	userEmail.sendKeys(email);
     	userPassword.sendKeys(password);
     	submit.click();	
-		ProductCatalogue productCatalogue = new ProductCatalogue(driver);
-        return productCatalogue;
+		return new ProductCatalogue(driver);
+        
     }
     
+    public WebElement getErrorMessage()
+    {
+    	WaitForWebElementToAppear(errorMessage);
+    	errorMessage.getText();
+    	return errorMessage;
+    	
+    }
+                                                                         
     public void goTO()
     {
 		driver.get("https://rahulshettyacademy.com/client/");
     }
+    
+    
      
     
 }

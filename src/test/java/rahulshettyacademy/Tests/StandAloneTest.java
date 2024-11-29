@@ -1,4 +1,4 @@
-package rahulshettyacademy;
+package rahulshettyacademy.Tests;
 
 import java.time.Duration;
 import java.util.List;
@@ -46,8 +46,8 @@ public class StandAloneTest {
 	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ta-results")));
 	    driver.findElement(By.xpath("(//button[contains(@class,'ta-item')])[2]")).click();
 	    driver.findElement(By.cssSelector(".action__submit")).click();
-	   String confirmationMessage = driver.findElement(By.cssSelector(".hero-primary")).getText();
-	   Assert.assertTrue(confirmationMessage.equalsIgnoreCase("Thankyou for the order.")) ;
+	    String confirmationMessage = driver.findElement(By.cssSelector(".hero-primary")).getText();
+	    Assert.assertTrue(confirmationMessage.equalsIgnoreCase("Thankyou for the order.")) ;
 	    driver.close();
 	}
 
