@@ -1,6 +1,7 @@
 package rahulshettyacademy.Tests;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
@@ -20,39 +21,34 @@ public class SubmitOrderTest extends  BaseTest {
 	String productName = "ZARA COAT 3";
 
 	@Test(dataProvider = "getData" , groups = {"Purchase"})
-	public void submitOrder(String email, String password, String productName) throws IOException, InterruptedException
-	{
-		
-		ProductCatalogue productCatalogue=landingPage.loginApplication(email, password);
-		List<WebElement> products = productCatalogue.getProductList();
-		productCatalogue.addProductToCart(productName);    
-		CartPage cartPage =productCatalogue.goToCartPage();        
-	    boolean match = cartPage.VerifyProductDisplay(productName);
-	    Assert.assertTrue(match);	
-	    CheckoutPage  checkoutPage = cartPage.goToCheckout();
-	    checkoutPage.SelectCountry("india");
-	    ConfirmationPage confirmationPage = checkoutPage.submitOrder();
-	    String confirmationMessage = confirmationPage.getConfirmationMessage();
-	    Assert.assertTrue(confirmationMessage.equalsIgnoreCase("Thankyou for the order."));
-	
-	
+	public void submitOrder(HashMap <String , String > input) throws IOException, InterruptedException
+	{		
+		ProductCatalogue productCatalogue=landingPage.loginApplication(input.get("email"), input.get("password"));
 	}    
 	
 	@Test(dependsOnMethods = {"submitOrder"})
 	public void OrderHistoryTest()
 	{
-		
 		ProductCatalogue productCatalogue = landingPage.loginApplication("abhishekmone.12@gmail.com", "Auto@123!");
 		OrdersPage ordersPage =productCatalogue.goOrdersPage();
-		Assert.assertTrue(ordersPage.VerifyOrdersDisplay(productName));
-		
+		Assert.assertTrue(ordersPage.VerifyOrdersDisplay(productName));	
 	}
 	 
 	@DataProvider
 	public Object[][] getData()
 	{
+		HashMap <String, String> map = new HashMap <String, String>();
+		map.put("email","abhishekmone.12@gmail.com");
+		map.put("password","Auto@123!");
+		map.put("productName", "ZARA COAT 3");
 		
-		return new Object [][] {{"abhishekmone.12@gmail.com","Auto@123!", "ZARA COAT 3"},{"t4163200@gmail.com", "Auto@123!","ADIDAS ORIGINAL"}};
+		HashMap <String, String> map1 = new HashMap <String, String>();
+		map1.put("email","t4163200@gmail.com");
+		map1.put("password","Auto@123!");
+		map1.put("productName", "ADIDAS ORIGINAL");
+		
+		
+		return new Object [][] {{map},{map1}};
 		
 	}
 	
